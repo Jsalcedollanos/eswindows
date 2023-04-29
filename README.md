@@ -1,4 +1,9 @@
 # Eswindows
+procede a crear el entorno virtual y posterior instalar el archivo requirements.txt
+
+comando: 
+    pip install-r requirements.txt
+
 
 Lo primero que debemos tener en cuenta es instalar un par de paquetes para poder inicializar la base de datos y poder realizar las migraciones para las tablas.
 
