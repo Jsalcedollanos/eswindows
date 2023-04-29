@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Cambiar estado de orden
+{% endblock title %}
+
+{% block content %}
+    <h1>Estado de orden</h1>
+    <div class="content-form">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == "error" %}
+                    <p style="color:black;background:red">{{message}}</p>
+                    {% else %}
+                    <p style="color:black; background:green">{{message}}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'updateEstado' orden.idOrden %}" method="POST">
+            <!-- Llave CSRF token -->
+            {% csrf_token %}
+            <h3>Cliente: {{orden.cliente.nombre}}</h3>
+            <p>Detalle de la orden</p>
+            <ul>
+                <li>
+                    Dimension del vidrio: {{orden.detalle}}
+                </li>
+                <li>
+                    Fecha de orden: {{orden.create_at}}
+                </li>
+                <li style="color:blue;">
+                    Estado actual: {{orden.estado}}
+                </li>
+            </ul>
+            Estado:
+            <select name="estado">
+                <option value="{{orden.estado}}" selected>{{orden.estado}}</option>
+                <option value="Aprobada">Aprobado</option>
+                <option value="Anulada">Anulada</option>
+              </select>
+            <br><br>
+
+
+            <input type="submit" value="Actualizar">
+        </form>
+    </div>
+{% endblock content %}

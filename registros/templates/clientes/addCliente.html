@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Registro de cliente
+{% endblock title %}
+
+{% block content %}
+    <h1>Registro de clientes</h1>
+    <div class="content-form">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == "error" %}
+                    <p style="color:black;background:red">{{message}}</p>
+                    {% else %}
+                    <p style="color:black; background:green">{{message}}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <form action="" method="POST">
+            <!-- Llave CSRF token -->
+            {% csrf_token %}
+            
+            {{form.as_p}}
+            <input type="submit" value="Guardar">
+        </form>
+    </div>
+{% endblock content %}

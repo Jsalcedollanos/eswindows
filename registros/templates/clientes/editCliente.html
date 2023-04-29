@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Registro de cliente
+{% endblock title %}
+
+{% block content %}
+    <h1>Registro de clientes</h1>
+    <div class="content-form">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == "error" %}
+                    <p style="color:black;background:red">{{message}}</p>
+                    {% else %}
+                    <p style="color:black; background:green">{{message}}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'updateCliente' cliente.id %}" method="POST">
+            <!-- Llave CSRF token -->
+            {% csrf_token %}
+            Nombre:<br>
+            <input type="text" name="nombre" required value="{{ cliente.nombre }}">
+            <br><br>
+
+            Direccion:<br>
+            <input type="text" name="direccion" required value="{{ cliente.direccion }}">
+            <br><br>
+
+            Telefono:<br>
+            <input type="number" name="telefono" required value="{{ cliente.telefono }}">
+            <br><br>
+
+            Nacionalidad:<br>
+            <input type="text" name="nacionalidad" required value="{{ cliente.nacionalidad }}">
+            <br><br>
+
+            Correo:<br>
+            <input name="correo" type="email" value="{{ cliente.correo }}">
+            <br><br>
+
+
+            <input type="submit" value="Actualizar">
+        </form>
+    </div>
+{% endblock content %}

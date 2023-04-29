@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block title %}
+    Registro de ordenes
+{% endblock %}
+{% block content %}
+<a href="{% url 'addOrden' %}"><button type="button" class="btn btn-light">Añadir Orden</button></a>
+    <h1>Sistema de registro de ordenes</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nº orden</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">fecha orden</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Dimension</th>
+            <th scope="col">Accion</th>
+          </tr>
+        </thead>
+        {% for orden in ordenes %}
+        <tbody>
+          <tr>
+            <td>{{orden.idOrden}}</td>
+            <td>{{orden.cliente.nombre}}</td>
+            <td>{{orden.create_at}}</td>
+            <td>{{orden.estado}}</td>
+            <td>{{orden.detalle}}</td>
+            <td>
+              <a href="{% url 'cargarOrden' orden.idOrden %}"><button type="button" class="btn btn-info" id="">Estado</button>
+              <a href="{% url 'eliminarOrden' orden.idOrden %}"> <button type="button" class="btn btn-danger" id="{{orden.idOrden}}">Eliminar</button></a>
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+{% endblock %}

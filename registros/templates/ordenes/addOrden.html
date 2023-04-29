@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}
+Registro de orden
+{% endblock title %}
+
+{% block content %}
+    <h1>Registro de Ordenes</h1>
+    <div class="content-form">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == "error" %}
+                    <p style="color:black;background:red">{{message}}</p>
+                    {% else %}
+                    <p style="color:black; background:green">{{message}}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'crearOrden' %}" method="POST">
+            <!-- Llave CSRF token -->
+            {% csrf_token %}
+            Cliente:
+            <select name="cliente_id">
+                <option value="{{orden.estado}}" selected>{{orden.estado}}</option>
+                {% for ord in orden %}
+                    <option value="{{ord.id}}">{{ord.nombre}}</option>
+                {% endfor %}
+              </select>
+            <br><br>
+
+            
+            Detalle:<br>
+            <input type="text" class="detalle" id="detalle" name="detalle" required value="">
+            <br><br>
+            
+            
+
+            <input type="submit" value="Guardar">
+        </form>
+    </div>
+
+{% endblock content %}
